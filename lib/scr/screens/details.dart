@@ -1,9 +1,9 @@
-
-
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine_app/scr/commans.dart';
+import 'package:medicine_app/scr/helpers/screen_navigation.dart';
 import 'package:medicine_app/scr/modeles/products.dart';
+import 'package:medicine_app/scr/screens/cart.dart';
 import 'package:medicine_app/scr/widgets/custum_text.dart';
 import 'package:medicine_app/scr/widgets/small_floating_button.dart';
 
@@ -19,13 +19,30 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: black),
+          backgroundColor: white,
+          elevation: 0.0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.shopping_cart_sharp),
+              onPressed: () {
+                changeScreen(context, ShoppingCart());
+              },
+            )
+          ],
+          leading: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
         backgroundColor: white,
         body: SafeArea(
           child: Column(
             children: <Widget>[
               Container(
-
-                  
                   height: 300,
                   child: Stack(children: <Widget>[
                     Padding(padding: EdgeInsets.all(20)),
@@ -53,15 +70,6 @@ class _DetailsState extends State<Details> {
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Stack(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Stack(
-                                  children: [
-                                    Image.asset("images/cart2.png",
-                                        width: 50, height: 30),
-                                  ],
-                                ),
-                              ),
                               Positioned(
                                 right: 5,
                                 bottom: 0,
@@ -119,21 +127,22 @@ class _DetailsState extends State<Details> {
                 weight: FontWeight.bold,
               ),
               Custumtext(
-                text: "\₹${widget.items.price}",
-                size: 24,
-                weight: FontWeight.w600,
-                color:Colors.black
-              ),
-              SizedBox(
-
-              ),
-              
+                  text: "\₹${widget.items.price}",
+                  size: 24,
+                  weight: FontWeight.w600,
+                  color: Colors.black),
+              SizedBox(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: IconButton(onPressed:(){}, icon: Icon(Icons.remove,size: 28,)),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.remove,
+                          size: 28,
+                        )),
                   ),
                   GestureDetector(
                     onTap: () {},
@@ -141,14 +150,24 @@ class _DetailsState extends State<Details> {
                       decoration: BoxDecoration(
                         color: green[800],
                       ),
-                      child:  Padding(padding: EdgeInsets.fromLTRB(24,8,15,8),
-                      child:  Custumtext(text: "Add To Cart",color: white,size: 24,),
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(24, 8, 15, 8),
+                        child: Custumtext(
+                          text: "Add To Cart",
+                          color: white,
+                          size: 24,
+                        ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: IconButton(onPressed:(){}, icon: Icon(Icons.add,size: 28,)),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.add,
+                          size: 28,
+                        )),
                   ),
                 ],
               )
